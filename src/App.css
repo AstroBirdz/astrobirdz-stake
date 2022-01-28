@@ -1,38 +1,118 @@
-.App {
-  text-align: center;
+/* navbar and background */
+.bg-btn-color{
+  background-image: linear-gradient(90deg,#e1559e,#1c144d);
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+}
+.bg-btn-color:focus{
+  box-shadow: none !important ;
+}
+.text-grey-color,#numb::placeholder,#numb{
+  color:#9aa4bd
+}
+.bg-btn-color:active{
+  background-image: linear-gradient(90deg,#e1559e,#1c144d) !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+.active{
+  border-bottom: 2px solid #bf4b8e !important;
+}
+.nav-font{
+  font-size: 20px;
+}
+.nav-link{
+  padding: 0px;
+  padding-bottom: 3px;
+
+}
+.main-bg{
+  background-color: #070e1e;
+}
+.abz-bg{
+  position: absolute;
+  opacity: 0.1;
+  left: 25%;
+  top:25%
+}
+@media (max-width:350px){
+.abznavlogo{
+  width: 75% !important;
+}
+}
+/* Staking */ 
+.border-box{
+  border:2px solid #0d2c41;
+  border-radius: 12px;
+}
+.pointer{
+  cursor:pointer
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dropdown-stake > div>button,.dropdown-stake > div>button:hover,.dropdown-stake > div>button:active{
+  background:transparent !important;
+  border:none
 }
+.dropdown-stake > div>button:focus{
+  box-shadow: none !important;
+  outline: none !important;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+}
+.dropdown-item:active,.dropdown-item:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #070e1e !important;
+  cursor: pointer;
+}
+#numb{
+  width:45%
+}
+@media (min-width:992px){
+  #numb{
+    width:35%
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Tier */
+.abzbird{
+  width: 51px;
+  height: 41px;
+}
+.abzbird-stake{
+  width: 29px;
+  height: 25px;
+}
+.border-bottom-tier{
+  border-bottom: 2px solid #0d2c41;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width:1280px){
+  .abz-bg{
+    position: absolute;
+    opacity: 0.1;
+    left: 25%;
+    top:18%;
+    width: 800px !important;
+    height: 600px !important;
   }
-  to {
-    transform: rotate(360deg);
+}
+/* @media (min-width:1380px){
+  .abz-bg{
+    left: 25%;
+    top:15%;
+  }
+} */
+
+@media (max-width:420px){
+  .tier-font{
+    font-size: 14px;
+  }
+  .abz-bg{
+    position: absolute;
+    opacity: 0.1;
+    left: 15%;
+    top:30%;
+    width: 75% !important;
   }
 }
