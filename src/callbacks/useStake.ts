@@ -2,7 +2,7 @@ import { useBEP20, useStakingContract } from "hooks/useContract"
 import { useActiveWeb3React } from "hooks/web3"
 import { useCallback, useEffect, useState } from "react"
 import { getTokenAddress } from "utils/addressHelper"
-import { addStake, getReward, getuserStakes, withDrawStake, configureLocks, approve, accountStake } from "utils/callHelper"
+import { addStake, getReward, withDrawStake, configureLocks, approve, accountStake } from "utils/callHelper"
 
 
 interface durationOptions {
@@ -51,7 +51,7 @@ export const useStake = () => {
                 setStakes(temp.stakes)
                 setEarn(temp.stakesEarned)
             } catch (error) {
-                alert((error as any).message)
+                // alert((error as any).message)
             } finally {
                 setLoading(false)
             }

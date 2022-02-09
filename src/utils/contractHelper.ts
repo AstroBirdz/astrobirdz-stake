@@ -9,6 +9,8 @@ import { getstakeAddress } from '../utils/addressHelper'
 // ABI
 import bep20Abi from 'config/abi/IBEP20.json'
 import stakingAbi from 'config/abi/AstroBirdzStaking.json'
+
+//types
 import { IBEP20 } from 'config/types/IBEP20'
 import { astroStakes } from 'config/types/astroStakes'
 

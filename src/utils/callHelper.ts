@@ -7,6 +7,9 @@ import { getstakeAddress } from './addressHelper';
 export const approve = (contract: IBEP20, amount: BigNumber, account: string) => {
     return contract.methods.approve(getstakeAddress(), amount.toFixed()).send({ from: account })
 }
+export const tokenBalance =(contract: IBEP20,account: string)=>{
+    return contract.methods.balanceOf(account).call();
+}
 export const configureLocks = async (contract: astroStakes, index: number) => {
     return contract.methods.configuredLocks(index).call();
 }

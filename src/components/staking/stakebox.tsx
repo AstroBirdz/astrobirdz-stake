@@ -4,18 +4,20 @@ import { isEmpty } from "lodash";
 import { validateSingle } from 'utils/validate';
 import abzbird from '../../images/birdlogo.png'
 import { useStake } from 'callbacks/useStake';
-import { formatDate, formatDuration } from 'utils/formatters';
-
+import { formatBN, formatDuration } from 'utils/formatters';
+import { useToken } from 'hooks/useToken';
 
 const Stakebox: FC = () => {
 
     const { stakesOption, create } = useStake()
 
+    const { balance } = useToken()
+
     const [dropdownOpen, setdropdownOpen] = useState<boolean>(false)
-    const [dropdownvalue, setdropdownvalue] = useState<string>('Year')
+    const [dropdownvalue, setdropdownvalue] = useState<string>("SELECT")
 
     const [amount, setAmount] = useState<any>()
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState<number>()
     const [amountError, setAmountError] = useState('');
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value, error } = validateSingle(event.target.value, 'BigNumber');
@@ -26,7 +28,7 @@ const Stakebox: FC = () => {
         }
         setAmount(value)
     }
-    const valid = useMemo(() => isEmpty(amountError) && amount, [amountError, amount])
+    const valid = useMemo(() => isEmpty(amountError) && amount && (index + 1), [amountError, amount, index])
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault()
         if (amount) create(amount, index)
@@ -42,7 +44,7 @@ const Stakebox: FC = () => {
             <div className="border-box p-3 my-4 text-white">
                 <div className="form-group d-flex justify-content-between align-items-start">
                     <label htmlFor="numb" className="text-grey-color mb-3">Input</label>
-                    <p className="mb-0 text-grey-color">Balance : 0</p>
+                    <p className="mb-0 text-grey-color">Balance : {balance}</p>
                 </div>
                 <div className="d-flex justify-content-between align-items-start">
                     <input
@@ -77,7 +79,7 @@ const Stakebox: FC = () => {
                         <DropdownMenu>
                             {isEmpty(stakesOption) ? null : <>
                                 {stakesOption.map((option, ind) => {
-                                    return <DropdownItem key={ind} onClick={() => setIndex(ind)}>{parseInt(option.apy) / 100}% apy {formatDuration(parseInt(option.time)*1000)}</DropdownItem>
+                                    return <DropdownItem key={ind} onClick={() => { setIndex(ind); setdropdownvalue(`${parseInt(option.apy) / 100}% apy ${formatDuration(parseInt(option.time) * 1000)}`) }}>{parseInt(option.apy) / 100}% apy {formatDuration(parseInt(option.time) * 1000)}</DropdownItem>
                                 })}
                             </>}
                         </DropdownMenu>
