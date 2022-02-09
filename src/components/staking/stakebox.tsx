@@ -4,6 +4,7 @@ import { isEmpty } from "lodash";
 import { validateSingle } from 'utils/validate';
 import abzbird from '../../images/birdlogo.png'
 import { useStake } from 'callbacks/useStake';
+import { formatDate, formatDuration } from 'utils/formatters';
 
 
 const Stakebox: FC = () => {
@@ -75,8 +76,8 @@ const Stakebox: FC = () => {
                         </DropdownToggle>
                         <DropdownMenu>
                             {isEmpty(stakesOption) ? null : <>
-                                {stakesOption.map((options, ind) => {
-                                    return <DropdownItem key={ind} onClick={() => setIndex(ind)}>{options.apy} apy {options.time} time</DropdownItem>
+                                {stakesOption.map((option, ind) => {
+                                    return <DropdownItem key={ind} onClick={() => setIndex(ind)}>{parseInt(option.apy) / 100}% apy {formatDuration(parseInt(option.time)*1000)}</DropdownItem>
                                 })}
                             </>}
                         </DropdownMenu>

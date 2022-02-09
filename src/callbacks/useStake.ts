@@ -2,12 +2,22 @@ import { useBEP20, useStakingContract } from "hooks/useContract"
 import { useActiveWeb3React } from "hooks/web3"
 import { useCallback, useEffect, useState } from "react"
 import { getTokenAddress } from "utils/addressHelper"
-import { addStake, getReward, getuserStakes, withDrawStake, configureLocks, approve } from "utils/callHelper"
+import { addStake, getReward, getuserStakes, withDrawStake, configureLocks, approve, accountStake } from "utils/callHelper"
 
 
 interface durationOptions {
     time: string,
     apy: string
+}
+export interface IStake {
+    active: boolean,
+    apy: string,
+    currentRewards: string,
+    lastUpdated: string,
+    stake: string,
+    started: string,
+    unlock: string,
+    withdrawnRewards: string,
 }
 
 export const useStake = () => {
@@ -17,7 +27,8 @@ export const useStake = () => {
 
     const tokenContract = useBEP20(getTokenAddress())
 
-    const [stakes, setStakes] = useState([])
+    const [stakes, setStakes] = useState<Partial<IStake[]>>([])
+    const [earn, setEarn] = useState<any>([])
     const [stakesOption, setStakeOption] = useState<Partial<durationOptions[]>>([])
     const [isLoading, setLoading] = useState<boolean>(false)
 
@@ -36,8 +47,9 @@ export const useStake = () => {
         async (_account: string) => {
             setLoading(true)
             try {
-                const userStake = await getuserStakes(stakecontract, _account);
-                setStakes(userStake)
+                let temp = await accountStake(stakecontract, _account, false)
+                setStakes(temp.stakes)
+                setEarn(temp.stakesEarned)
             } catch (error) {
                 alert((error as any).message)
             } finally {
@@ -46,28 +58,33 @@ export const useStake = () => {
         }, [stakecontract])
 
     useEffect(() => {
-        // if (account) getStakes(account)
+        if (account) getStakes(account)
         configLock()
     }, [account, getStakes, configLock])
 
     const create = useCallback(
         async (amount, configureLock) => {
-            if(account){
+            if (account) {
                 const tx = await approve(tokenContract, amount, account)
-                if (tx.status) await addStake(stakecontract, amount, configureLock, account)
-            }else{
+                if (tx.status) {
+                    let txStake = await addStake(stakecontract, amount, configureLock, account)
+                    if (txStake.status) getStakes(account)
+                }
+            } else {
                 alert('please connect wallet')
             }
         }, [stakecontract])
 
     const withDraw = useCallback(
         async (amount, stakeID) => {
-            const abc = await withDrawStake(stakecontract, amount, stakeID, account)
+            const tx = await withDrawStake(stakecontract, amount, stakeID, account)
+            if (tx.status) getStakes(account)
         }, [stakecontract])
 
     const reward = useCallback(
         async (stakeID) => {
-            const abc = await getReward(stakecontract, stakeID, account)
+            const tx = await getReward(stakecontract, stakeID, account)
+            if (tx.status) getStakes(account)
         }, [stakecontract])
 
     return { isLoading, stakesOption, stakes, create, withDraw, reward }

@@ -33,11 +33,50 @@ export interface astroStakes extends BaseContract {
     methods: {
         initialize(_stakingToken: string, _rewardsToken: string): NonPayableTransactionObject<void>
 
-        allAccountStakes(
-            creator: string
-        ): NonPayableTransactionObject<
-            any[] | null>
+        configuredLocks(index: number): NonPayableTransactionObject<any | null>
 
-        configuredLocks(index:number): NonPayableTransactionObject<any | null>
+        allAccountStakes(
+            creator: string,
+            index: number
+        ): NonPayableTransactionObject<{
+            active: boolean,
+            apy: string,
+            currentRewards: string,
+            lastUpdated: string,
+            stake: string,
+            started: string,
+            unlock: string,
+            withdrawnRewards: string,
+            0: boolean,
+            1: string,
+            2: string,
+            3: string,
+            4: string,
+            5: string,
+            6: string,
+            7: string,
+        } | null>
+
+        accountStakes(creator: string, addEarned: boolean): NonPayableTransactionObject<{
+            stakes: {
+                active: boolean,
+                apy: string,
+                currentRewards: string,
+                lastUpdated: string,
+                stake: string,
+                started: string,
+                unlock: string,
+                withdrawnRewards: string,
+                0: boolean,
+                1: string,
+                2: string,
+                3: string,
+                4: string,
+                5: string,
+                6: string,
+                7: string,
+            }[],
+            stakesEarned: string[]
+        } | null>
     }
 }
