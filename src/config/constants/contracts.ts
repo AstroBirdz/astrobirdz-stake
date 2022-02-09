@@ -1,11 +1,9 @@
 export default {
-    paybill: {
-        97: '0xBaF9fB6c2e3A277670A4D2F251c0355530c854de'
+
+    astrobirdz:{
+        97:'0x9624cd2e91504692e120802e80a313f84847dc40'
     },
-    paybillTest: {
-        97: '0x893398c8687Cd529F24B9B6F5CB2f4f407a94e7f'
+    astroStake: {
+        97: '0x49ae07126cD7fDC1e4be57BDC9Eee6065ecee5E6'
     },
-    paybillTest1:{
-        97:'0xBaF9fB6c2e3A277670A4D2F251c0355530c854de'
-    }
 }
