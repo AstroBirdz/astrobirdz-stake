@@ -65,7 +65,10 @@ export const useStake = () => {
                     const tx = await approve(tokenContract, amount, account)
                     if (tx.status) {
                         let txStake = await addStake(stakecontract, amount, configureLock, account)
-                        if (txStake.status) { getStakes(account) }
+                        if (txStake.status) { 
+                            console.log('test')
+                            getStakes(account)
+                        }
                     }
                 } else {
                     alert('please connect wallet')

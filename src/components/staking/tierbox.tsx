@@ -10,12 +10,12 @@ interface ItierBox {
 
 const Tierbox = ({ stake, index }: ItierBox) => {
 
-    const { earn, withDraw, reward } = useStake()
+    const { earn, withDraw, reward, isLoading } = useStake()
     return (
         <div>
             <div className="border-box p-2 p-sm-3 mb-3">
                 <div className='d-flex justify-content-between align-items-center border-bottom-tier pb-2'>
-                    <div className='text-white'><p className='mb-0 h5'><img className='abzbird mr-2' src={abzbird} alt="..."></img> Tier {index + 1}</p></div>
+                    <div className='text-white'><p className='mb-0 h5'><img className='abzbird mr-2' src={abzbird} alt="..."></img> Stake {index + 1}</p></div>
                 </div>
                 <div className='my-3 border-bottom-tier pb-1'>
                     <div className='d-flex justify-content-between align-items-center'>

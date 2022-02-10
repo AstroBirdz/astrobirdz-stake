@@ -37,7 +37,7 @@ const Stakebox: FC = () => {
 
     return (
         <div className="border-box p-3 p-sm-4 mb-3 mb-lg-0">
-            {isLoading ? (
+            {/* {isLoading ? (
                 <div className="d-flex justify-content-between">
                     <DoubleBorderSpinner
                         style={{
@@ -55,7 +55,7 @@ const Stakebox: FC = () => {
                 </div>
             ) : (
                 <div className="d-flex justify-content-between"></div>
-            )}
+            )} */}
             <div className="d-flex justify-content-between align-items-center">
                 <i className="fal fa-arrow-left text-white" style={{ fontSize: '20px', cursor: 'pointer' }}></i>
                 <p className="text-white h4">Stake</p>
