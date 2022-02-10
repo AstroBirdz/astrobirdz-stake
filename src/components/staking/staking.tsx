@@ -6,7 +6,7 @@ import { DoubleBorderSpinner } from "react-fancy-loader";
 
 
 const Staking = () => {
-    const { stakes, isLoading } = useStake()
+    const { stakes, earn, isLoading, create, withDraw, reward } = useStake()
 
     return (
         <div className="container-fluid">
@@ -32,24 +32,27 @@ const Staking = () => {
             )}
             <div className="row mt-4 pb-5">
                 <div className="col-lg-6 offset-lg-3">
-                    <Stakebox />
+                    <Stakebox create={create} />
                 </div>
             </div>
             <div className="row">
                 {/* <div className="col-lg-4"> */}
-                    {!stakes.length || isLoading ? null : <>
-                        {stakes.map((stake, ind) => {
-                            return (
-                                <div className="col-lg-4">
+                {!stakes.length || isLoading ? null : <>
+                    {stakes.map((stake, ind) => {
+                        return (
+                            <div className="col-lg-4">
                                 <Tierbox
                                     stake={stake}
+                                    earn={earn}
                                     key={ind}
                                     index={ind}
+                                    withDraw={withDraw}
+                                    reWard={reward}
                                 />
-                                </div>
-                            )
-                        })}
-                    </>}
+                            </div>
+                        )
+                    })}
+                </>}
                 {/* </div> */}
             </div>
         </div>

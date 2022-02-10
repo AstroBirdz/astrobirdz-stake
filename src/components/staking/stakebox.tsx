@@ -8,9 +8,13 @@ import { formatBN, formatDuration } from 'utils/formatters';
 import { useToken } from 'hooks/useToken';
 import { DoubleBorderSpinner } from "react-fancy-loader";
 
-const Stakebox: FC = () => {
+interface props{
+    create:(amount,index)=>void
+}
 
-    const { stakesOption, create,isLoading } = useStake()
+const Stakebox = ({create}:props) => {
+
+    const { stakesOption} = useStake()
 
     const { balance } = useToken()
 
@@ -37,25 +41,6 @@ const Stakebox: FC = () => {
 
     return (
         <div className="border-box p-3 p-sm-4 mb-3 mb-lg-0">
-            {/* {isLoading ? (
-                <div className="d-flex justify-content-between">
-                    <DoubleBorderSpinner
-                        style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            margin: "auto",
-                        }}
-                        className="d-flex justify-content-center mt-3"
-                        size={100}
-                        color="gold"
-                        stroke={9}
-                        duration={1000}
-                    />
-                </div>
-            ) : (
-                <div className="d-flex justify-content-between"></div>
-            )} */}
             <div className="d-flex justify-content-between align-items-center">
                 <i className="fal fa-arrow-left text-white" style={{ fontSize: '20px', cursor: 'pointer' }}></i>
                 <p className="text-white h4">Stake</p>

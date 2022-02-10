@@ -1,6 +1,7 @@
 import { useBEP20, useStakingContract } from "hooks/useContract"
 import { useActiveWeb3React } from "hooks/web3"
 import { useCallback, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { getTokenAddress } from "utils/addressHelper"
 import { addStake, getReward, withDrawStake, configureLocks, approve, accountStake } from "utils/callHelper"
 
@@ -27,6 +28,8 @@ export const useStake = () => {
 
     const tokenContract = useBEP20(getTokenAddress())
 
+    const navigate = useNavigate()
+
     const [stakes, setStakes] = useState<Partial<IStake[]>>([])
     const [earn, setEarn] = useState<any>([])
     const [stakesOption, setStakeOption] = useState<Partial<durationOptions[]>>([])
@@ -45,6 +48,7 @@ export const useStake = () => {
                 let temp = await accountStake(stakecontract, _account, true)
                 setStakes(temp.stakes)
                 setEarn(temp.stakesEarned)
+
             } catch (error) {
                 // alert((error as any).message)
             } finally {
@@ -65,10 +69,8 @@ export const useStake = () => {
                     const tx = await approve(tokenContract, amount, account)
                     if (tx.status) {
                         let txStake = await addStake(stakecontract, amount, configureLock, account)
-                        if (txStake.status) { 
-                            console.log('test')
-                            getStakes(account)
-                        }
+                        if (txStake.status) getStakes(account)
+
                     }
                 } else {
                     alert('please connect wallet')
