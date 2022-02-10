@@ -10,8 +10,8 @@ export const approve = (contract: IBEP20, amount: BigNumber, account: string) =>
 export const tokenBalance =(contract: IBEP20,account: string)=>{
     return contract.methods.balanceOf(account).call();
 }
-export const configureLocks = async (contract: astroStakes, index: number) => {
-    return contract.methods.configuredLocks(index).call();
+export const configureLocks = async (contract: any) => {
+    return contract.methods.allConfiguredLocks().call();
 }
 export const accountStake = (contract: astroStakes, account: string, addEarned: boolean) => {
     return contract.methods.accountStakes(account, addEarned).call();

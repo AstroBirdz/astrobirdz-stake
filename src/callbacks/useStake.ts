@@ -34,12 +34,7 @@ export const useStake = () => {
 
     const configLock = useCallback(
         async () => {
-            let n: number = 0;
-            let temp: typeof stakesOption = [];
-            while (n < 5) {
-                temp[n] = await configureLocks(stakecontract, n);
-                n++;
-            }
+            let temp = await configureLocks(stakecontract);
             setStakeOption(temp)
         }, [stakecontract])
 
@@ -47,7 +42,7 @@ export const useStake = () => {
         async (_account: string) => {
             setLoading(true)
             try {
-                let temp = await accountStake(stakecontract, _account, false)
+                let temp = await accountStake(stakecontract, _account, true)
                 setStakes(temp.stakes)
                 setEarn(temp.stakesEarned)
             } catch (error) {
@@ -64,28 +59,39 @@ export const useStake = () => {
 
     const create = useCallback(
         async (amount, configureLock) => {
-            if (account) {
-                const tx = await approve(tokenContract, amount, account)
-                if (tx.status) {
-                    let txStake = await addStake(stakecontract, amount, configureLock, account)
-                    if (txStake.status) getStakes(account)
+            try {
+                if (account) {
+                    setLoading(true)
+                    const tx = await approve(tokenContract, amount, account)
+                    if (tx.status) {
+                        let txStake = await addStake(stakecontract, amount, configureLock, account)
+                        if (txStake.status) { getStakes(account) }
+                    }
+                } else {
+                    alert('please connect wallet')
                 }
-            } else {
-                alert('please connect wallet')
+            } catch (error) {
+                alert((error as any).message)
+            } finally {
+                setLoading(false)
             }
         }, [stakecontract])
 
     const withDraw = useCallback(
         async (amount, stakeID) => {
+            setLoading(true)
             const tx = await withDrawStake(stakecontract, amount, stakeID, account)
             if (tx.status) getStakes(account)
+            setLoading(false)
         }, [stakecontract])
 
     const reward = useCallback(
         async (stakeID) => {
+            setLoading(true)
             const tx = await getReward(stakecontract, stakeID, account)
             if (tx.status) getStakes(account)
+            setLoading(false)
         }, [stakecontract])
 
-    return { isLoading, stakesOption, stakes, create, withDraw, reward }
+    return { isLoading, stakesOption, stakes, earn, create, withDraw, reward }
 }
