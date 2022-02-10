@@ -7,10 +7,6 @@ import { isMobile } from 'react-device-detect'
 import { injected, walletconnect } from 'utils/web3React'
 import { NetworkContextName } from 'config/constants/wallets'
 
-import {
-  UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
-} from '@web3-react/walletconnect-connector'
-
 export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> {
   const context = useWeb3ReactCore<Web3Provider>()
   const contextNetwork = useWeb3ReactCore<Web3Provider>(NetworkContextName)

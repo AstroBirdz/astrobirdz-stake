@@ -28,8 +28,6 @@ export const useStake = () => {
 
     const tokenContract = useBEP20(getTokenAddress())
 
-    const navigate = useNavigate()
-
     const [stakes, setStakes] = useState<Partial<IStake[]>>([])
     const [earn, setEarn] = useState<any>([])
     const [stakesOption, setStakeOption] = useState<Partial<durationOptions[]>>([])
@@ -48,7 +46,6 @@ export const useStake = () => {
                 let temp = await accountStake(stakecontract, _account, true)
                 setStakes(temp.stakes)
                 setEarn(temp.stakesEarned)
-
             } catch (error) {
                 // alert((error as any).message)
             } finally {
@@ -70,7 +67,6 @@ export const useStake = () => {
                     if (tx.status) {
                         let txStake = await addStake(stakecontract, amount, configureLock, account)
                         if (txStake.status) getStakes(account)
-
                     }
                 } else {
                     alert('please connect wallet')

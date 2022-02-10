@@ -14,7 +14,6 @@ const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
 
 export const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 
-
 const walletConnectorSetting: IWalletConnectProviderOptions = {
   rpc: { [chainId]: rpcUrl },
   bridge: 'https://bridge.walletconnect.org',

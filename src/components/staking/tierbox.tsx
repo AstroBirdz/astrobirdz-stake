@@ -1,7 +1,7 @@
 import { IStake, useStake } from 'callbacks/useStake'
 import { Button } from 'reactstrap'
 import { formatBN, formatDateTime, formatDuration } from 'utils/formatters'
-import abzbird from '../../images/birdlogo.png'
+import abzbird from '../../images/astrologo.png'
 
 interface ItierBox {
     stake: any,

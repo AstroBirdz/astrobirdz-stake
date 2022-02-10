@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
 import { isEmpty } from "lodash";
 import { validateSingle } from 'utils/validate';
-import abzbird from '../../images/birdlogo.png'
+import abzbird from '../../images/astrologo.png';
 import { useStake } from 'callbacks/useStake';
 import { formatBN, formatDuration } from 'utils/formatters';
 import { useToken } from 'hooks/useToken';
@@ -96,7 +96,8 @@ const Stakebox = ({create}:props) => {
             </div>
             <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our term & condition before proceeding</p>
             <div className='border-box p-3 mt-5'>
-                <p className='mb-0 text-grey-color'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <p className='mb-0 text-grey-color'>
+                Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read Teams & Conditions before proceeding to stake your tokens.</p>
             </div>
             <Button
                 className="bg-btn-color w-100 py-2 my-5"

@@ -1,11 +1,13 @@
 import Stakebox from "./stakebox"
 import Tierbox from "./tierbox"
-import abzbglogo from '../../images/abzbglogo.png'
+import abzbglogo from '../../images/astrologo.png'
 import { useStake } from "callbacks/useStake"
 import { DoubleBorderSpinner } from "react-fancy-loader";
+import { useActiveWeb3React } from "hooks/web3";
 
 
 const Staking = () => {
+    const { account } = useActiveWeb3React()
     const { stakes, earn, isLoading, create, withDraw, reward } = useStake()
 
     return (
@@ -37,7 +39,7 @@ const Staking = () => {
             </div>
             <div className="row">
                 {/* <div className="col-lg-4"> */}
-                {!stakes.length || isLoading ? null : <>
+                {!stakes.length || isLoading || !account? null : <>
                     {stakes.map((stake, ind) => {
                         return (
                             <div className="col-lg-4">

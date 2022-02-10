@@ -1,21 +1,23 @@
 import { connectorLocalStorageKey, ConnectorNames } from 'config/constants/wallets'
 import useAuth from 'hooks/useAuth'
 import { useActiveWeb3React } from 'hooks/web3'
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Button } from 'reactstrap'
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
 import '../../App.css'
-import abznavlogo from '../../images/navlogo.png'
+import abznavlogo from '../../images/astrologo.png'
 
 const Navbar = () => {
     const navigate = useNavigate()
 
     const { login, logout } = useAuth()
     const { account } = useActiveWeb3React()
+    const [dropdownOpen, setdropdownOpen] = useState<boolean>(false)
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-transparent py-4">
-                <img src={abznavlogo} onClick={() => navigate('/')} className='abznavlogo pointer' alt="..."></img>
+            <nav className=" navbar navbar-expand-lg navbar-dark bg-transparent py-4">
+                <img src={abznavlogo} style={{ width: "100px" }} onClick={() => navigate('/')} className='abznavlogo pointer' alt="..."></img>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -26,16 +28,29 @@ const Navbar = () => {
                     </div>
                     {
                         account ? <>
-                            <Button
-                                className='px-4 py-2 ml-5 ml-lg-0 mt-2 mt-lg-0 bg-btn-color'
-                                onClick={() => logout()}>LogOut</Button>
+                            <div className='px-4 py-2 ml-5 ml-lg-0 mt-2 mt-lg-0 bg-btn-color'>{account }</div>
                         </> : <>
-                            <Button
+                            <Dropdown isOpen={dropdownOpen} toggle={() => setdropdownOpen(!dropdownOpen)}>
+                                <DropdownToggle caret className='px-4 py-2 ml-5 ml-lg-0 mt-2 mt-lg-0 bg-btn-color'>
+                                    Connect To a Wallet
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem onClick={() => {
+                                        login(ConnectorNames.Injected);
+                                        window.localStorage.setItem(connectorLocalStorageKey, ConnectorNames.Injected);
+                                    }}> MetaMask </DropdownItem>
+                                    <DropdownItem onClick={() => {
+                                        login(ConnectorNames.WalletConnect);
+                                        window.localStorage.setItem(connectorLocalStorageKey, ConnectorNames.WalletConnect);
+                                    }}> WalletConnect</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            {/* <Button
                                 className='px-4 py-2 ml-5 ml-lg-0 mt-2 mt-lg-0 bg-btn-color'
                                 onClick={() => {
                                     login(ConnectorNames.Injected);
                                     window.localStorage.setItem(connectorLocalStorageKey, ConnectorNames.Injected);
-                                }}>Connect To a Wallet </Button>
+                                }}>Connect To a Wallet </Button> */}
                         </>
                     }
                 </div>
