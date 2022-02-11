@@ -108,7 +108,8 @@ const Stakebox = ({ create }: props) => {
             <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our disclaimer before proceeding</p>
             <div className='border-box p-3 mt-5'>
                 <p className='mb-0 text-grey-color'>
-                    Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read our disclaimer before proceeding to stake your tokens.</p>
+                    "Note: There is no possibility to UNSTAKE your tokens BEFORE the  locking period has ended!"
+                </p>
             </div>
             <Button
                 className="bg-btn-color w-100 py-2 my-5"

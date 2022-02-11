@@ -23,7 +23,7 @@ let disclaimertable :{tier:number,months:number,apy:number}[] = [
     },
     {
         tier:2,
-        months:10,
+        months:12,
         apy:18
     },
     {

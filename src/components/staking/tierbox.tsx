@@ -13,6 +13,7 @@ interface ItierBox {
 
 const Tierbox = ({ stake, earn, index, withDraw, reWard }: ItierBox) => {
 
+
     return (
         <div>
             <div className="border-box p-2 p-sm-3 mb-3">
@@ -45,16 +46,16 @@ const Tierbox = ({ stake, earn, index, withDraw, reWard }: ItierBox) => {
                         <p className='mb-2 tier-font text-white'>{formatBN(earn[index])} ABZ</p>
                     </div> */}
                     <div className='d-flex justify-content-between align-items-center'>
-                        <p className='mb-2 tier-font text-grey-color'>withdrawn Rewards </p>
+                        <p className='mb-2 tier-font text-grey-color'>Withdrawn Rewards </p>
                         <p className='mb-2 tier-font text-white'>{stake.withdrawnRewards > 0 ? parseFloat(formatBN(stake.withdrawnRewards)).toFixed(6) : 0} ABZ</p>
                     </div>
                     <div className='d-flex justify-content-between align-items-center'>
-                        <p className='mb-2 tier-font text-grey-color'>last Updated </p>
+                        <p className='mb-2 tier-font text-grey-color'>Last Updated </p>
                         <p className='mb-2 tier-font text-white'>{formatDateTime(stake.lastUpdated * 1000)}</p>
                     </div>
                 </div>
                 <p className='mb-2 tier-font text-white'>{formatBN(stake.stake)} ABZ</p>
-                <Button className='bg-btn-color py-1 px-4' onClick={() => withDraw(stake.stake, index)}>Withdraw</Button>
+                <Button className='bg-btn-color py-1 px-4' disabled={stake.unlock < Date.now() / 1000 && stake.stake > 0 ? false : true} onClick={() => withDraw(stake.stake, index)}>Withdraw</Button>
                 <p className='mb-2 tier-font text-white'>{formatBN(earn[index])} ABZ</p>
                 <Button className='bg-btn-color py-1 px-4' onClick={() => reWard(index)}>Get Reward</Button>
                 {/* <p className='mb-0 text-white text-center tier-font'>Tier 1 earns 15% APY + 1 Egg + 1 Mystery Box</p> */}
