@@ -108,7 +108,7 @@ const Stakebox = ({ create }: props) => {
             <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our disclaimer before proceeding</p>
             <div className='border-box p-3 mt-5'>
                 <p className='mb-0 text-grey-color'>
-                    "Note: There is no possibility to UNSTAKE your tokens BEFORE the  locking period has ended!"
+                    Note: There is no possibility to UNSTAKE your tokens BEFORE the locking period has ended!
                 </p>
             </div>
             <Button
