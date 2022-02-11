@@ -21,10 +21,10 @@ const useAuth = () => {
 
   const login = useCallback((connectorID: ConnectorNames) => {
     const connector = connectorsByName[connectorID]
-    console.log('connector',connector)
+    console.log('connector', connector)
     if (connector) {
       activate(connector, async (error: Error) => {
-        console.log('error',error)
+        console.log('error', error)
         if (error instanceof UnsupportedChainIdError) {
           const hasSetup = await setupNetwork()
           if (hasSetup) {
@@ -42,7 +42,6 @@ const useAuth = () => {
             if (connector instanceof WalletConnectConnector) {
               const walletConnector = connector as WalletConnectConnector
               walletConnector.walletConnectProvider = null
-
             }
             alert('Please authorize to access your account')
             // toastError('Authorization Error', 'Please authorize to access your account')

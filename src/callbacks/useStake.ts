@@ -81,9 +81,14 @@ export const useStake = () => {
     const withDraw = useCallback(
         async (amount, stakeID) => {
             setLoading(true)
-            const tx = await withDrawStake(stakecontract, amount, stakeID, account)
-            if (tx.status) getStakes(account)
-            setLoading(false)
+            try {
+                const tx = await withDrawStake(stakecontract, amount, stakeID, account)
+                if (tx.status) getStakes(account)
+            } catch (error) {
+                alert((error as any).message)
+            } finally {
+                setLoading(false)
+            }
         }, [stakecontract])
 
     const reward = useCallback(

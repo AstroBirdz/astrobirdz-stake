@@ -5,13 +5,13 @@ import abzbird from '../../images/astrologo.png'
 
 interface ItierBox {
     stake: any,
-    earn:any
+    earn: any
     index: number,
-    withDraw:(amount,index)=>void,
-    reWard:(index)=>void
+    withDraw: (amount, index) => void,
+    reWard: (index) => void
 }
 
-const Tierbox = ({ stake,earn, index ,withDraw,reWard}: ItierBox) => {
+const Tierbox = ({ stake, earn, index, withDraw, reWard }: ItierBox) => {
 
     return (
         <div>
@@ -46,7 +46,7 @@ const Tierbox = ({ stake,earn, index ,withDraw,reWard}: ItierBox) => {
                     </div> */}
                     <div className='d-flex justify-content-between align-items-center'>
                         <p className='mb-2 tier-font text-grey-color'>withdrawn Rewards </p>
-                        <p className='mb-2 tier-font text-white'>{stake.withdrawnRewards} ABZ</p>
+                        <p className='mb-2 tier-font text-white'>{stake.withdrawnRewards > 0 ? parseFloat(formatBN(stake.withdrawnRewards)).toFixed(6) : 0} ABZ</p>
                     </div>
                     <div className='d-flex justify-content-between align-items-center'>
                         <p className='mb-2 tier-font text-grey-color'>last Updated </p>

@@ -1,37 +1,46 @@
 import React, { FC, useMemo, useState } from 'react'
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from 'reactstrap';
-import { isEmpty } from "lodash";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button, FormFeedback } from 'reactstrap';
+import { isFinite, isNil, toFinite, isEmpty } from 'lodash'
 import { validateSingle } from 'utils/validate';
 import abzbird from '../../images/astrologo.png';
 import { useStake } from 'callbacks/useStake';
 import { formatBN, formatDuration } from 'utils/formatters';
 import { useToken } from 'hooks/useToken';
 import { DoubleBorderSpinner } from "react-fancy-loader";
+import web3 from 'web3';
+import BigNumber from 'bignumber.js'
+import { utils } from 'ethers'
+import { toBigNumber } from 'utils/converters';
 
-interface props{
-    create:(amount,index)=>void
+interface props {
+    create: (amount, index) => void
 }
 
-const Stakebox = ({create}:props) => {
+const Stakebox = ({ create }: props) => {
 
-    const { stakesOption} = useStake()
+    const { stakesOption } = useStake()
 
     const { balance } = useToken()
 
     const [dropdownOpen, setdropdownOpen] = useState<boolean>(false)
-    const [dropdownvalue, setdropdownvalue] = useState<string>("SELECT")
+    const [dropdownvalue, setdropdownvalue] = useState<string>("TIME PERIOD")
 
     const [amount, setAmount] = useState<any>()
     const [index, setIndex] = useState<number>()
     const [amountError, setAmountError] = useState('');
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, error } = validateSingle(event.target.value, 'BigNumber');
-        if (error) {
-            setAmountError(error)
+        const { value } = event.target
+        if (value && toFinite(value) < 20000) {
+            setAmountError("amount should be greater than 20000")
         } else {
-            setAmountError(null)
+            const { value: amount, error } = validateSingle(value, 'BigNumber');
+            if (error) {
+                setAmountError(error)
+            } else {
+                setAmountError(null)
+                setAmount(amount)
+            }
         }
-        setAmount(value)
     }
     const valid = useMemo(() => isEmpty(amountError) && amount && (index + 1), [amountError, amount, index])
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -49,7 +58,7 @@ const Stakebox = ({create}:props) => {
             <div className="border-box p-3 my-4 text-white">
                 <div className="form-group d-flex justify-content-between align-items-start">
                     <label htmlFor="numb" className="text-grey-color mb-3">Input</label>
-                    <p className="mb-0 text-grey-color">Balance : {balance}</p>
+                    <p className="mb-0 text-grey-color">Balance : {formatBN(toBigNumber(balance))}</p>
                 </div>
                 <div className="d-flex justify-content-between align-items-start">
                     <input
@@ -61,6 +70,7 @@ const Stakebox = ({create}:props) => {
                     />
                     <p className="mb-0 text-white"><img src={abzbird} className='abzbird-stake mr-2' alt="..."></img>ABZ</p>
                 </div>
+                {amountError ? <div style={{ color: 'red' }}>{amountError}</div> : null}
             </div>
             <div className="my-4 text-white d-flex align-items-end">
                 {/* <span className="border-box py-2 px-2">
@@ -97,7 +107,7 @@ const Stakebox = ({create}:props) => {
             <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our term & condition before proceeding</p>
             <div className='border-box p-3 mt-5'>
                 <p className='mb-0 text-grey-color'>
-                Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read Teams & Conditions before proceeding to stake your tokens.</p>
+                    Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read Teams & Conditions before proceeding to stake your tokens.</p>
             </div>
             <Button
                 className="bg-btn-color w-100 py-2 my-5"

@@ -57,6 +57,13 @@ export interface astroStakes extends BaseContract {
             7: string,
         } | null>
 
+        allConfiguredLocks(): NonPayableTransactionObject<{
+            time: string,
+            apy: string,
+            0: string,
+            1: string
+        }[]>
+
         accountStakes(creator: string, addEarned: boolean): NonPayableTransactionObject<{
             stakes: {
                 active: boolean,
@@ -78,5 +85,27 @@ export interface astroStakes extends BaseContract {
             }[],
             stakesEarned: string[]
         } | null>
+
+        stake(amount: number | BN | string, index: number): NonPayableTransactionObject<void>
+
+        updateReward(account: string, index: number): NonPayableTransactionObject<void>
+
+        withdraw(amount: number | BN | string, index: number): NonPayableTransactionObject<void>
+
+        getReward(index: number): NonPayableTransactionObject<void>
+
+        exit(index: number): NonPayableTransactionObject<void>
+
+        getAllRewards(): NonPayableTransactionObject<void>
+
+        exitUnlocked(): NonPayableTransactionObject<void>
+
+        updateStartTime(startTime: number): NonPayableTransactionObject<void>
+
+        updateConfiguredLock(index: number, time: number, apy: number): NonPayableTransactionObject<void>
+
+        updateConfiguredLocks(locks: string[]): NonPayableTransactionObject<void>
+
+        earned(acount: string, index: number): NonPayableTransactionObject<string>
     }
 }
