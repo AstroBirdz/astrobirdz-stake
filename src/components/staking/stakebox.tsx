@@ -104,7 +104,7 @@ const Stakebox = ({ create }: props) => {
                     </Dropdown>
                 </div>
             </div>
-            <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our term & condition before proceeding</p>
+            <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our disclaimer before proceeding</p>
             <div className='border-box p-3 mt-5'>
                 <p className='mb-0 text-grey-color'>
                     Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read Teams & Conditions before proceeding to stake your tokens.</p>

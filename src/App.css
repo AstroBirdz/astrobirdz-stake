@@ -80,8 +80,8 @@
   height: 41px;
 }
 .abzbird-stake{
-  width: 29px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
 }
 .border-bottom-tier{
   border-bottom: 2px solid #0d2c41;
@@ -93,21 +93,14 @@
     opacity: 0.1;
     left: 25%;
     top:18%;
-    width: 800px !important;
-    height: 600px !important;
   }
 }
-@media (min-width:1500px){
-  .abz-bg{
-    left: 30%;
-  }
+
+.dis-font-weight{
+  font-weight: 700;
+  font-size: 18px;
 }
-/* @media (min-width:1380px){
-  .abz-bg{
-    left: 25%;
-    top:15%;
-  }
-} */
+
 
 @media (max-width:420px){
   .tier-font{
