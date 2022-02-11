@@ -53,7 +53,8 @@ const Stakebox = ({ create }: props) => {
             <div className="d-flex justify-content-between align-items-center">
                 <i className="fal fa-arrow-left text-white" style={{ fontSize: '20px', cursor: 'pointer' }}></i>
                 <p className="text-white h4">Stake</p>
-                <i className="fal fa-question-circle  text-white" style={{ fontSize: '20px', cursor: 'pointer' }}></i>
+                <span></span>
+                {/* <i className="fal fa-question-circle  text-white" style={{ fontSize: '20px', cursor: 'pointer' }}></i> */}
             </div>
             <div className="border-box p-3 my-4 text-white">
                 <div className="form-group d-flex justify-content-between align-items-start">
@@ -107,7 +108,7 @@ const Stakebox = ({ create }: props) => {
             <p className='mb-0 text-grey-color'><i className="fal fa-question-circle text-grey-color"></i> Read our disclaimer before proceeding</p>
             <div className='border-box p-3 mt-5'>
                 <p className='mb-0 text-grey-color'>
-                    Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read Teams & Conditions before proceeding to stake your tokens.</p>
+                    Note: Early unstaking will result in losing all the rewards and you will be refunded with your initial tokens. Please read our disclaimer before proceeding to stake your tokens.</p>
             </div>
             <Button
                 className="bg-btn-color w-100 py-2 my-5"
