@@ -87,7 +87,7 @@ const Staking = () => {
                       </tbody>
                     </table>
                     </div>
-                    <p className="text-white h5 mb-0 mt-3">Min Stake 20,000</p>
+                    <p className="text-white h5 mb-0 mt-3">Min Stake 50,000</p>
                 </div>
             </div>
             <div className="row">

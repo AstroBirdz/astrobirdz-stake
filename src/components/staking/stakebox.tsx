@@ -30,8 +30,8 @@ const Stakebox = ({ create }: props) => {
     const [amountError, setAmountError] = useState('');
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target
-        if (value && toFinite(value) < 20000) {
-            setAmountError("amount should be greater than 20000")
+        if (value && toFinite(value) < 50000) {
+            setAmountError("amount should be greater than 50000")
         } else {
             const { value: amount, error } = validateSingle(value, 'BigNumber');
             if (error) {
